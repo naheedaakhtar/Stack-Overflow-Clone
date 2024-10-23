@@ -10,14 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_21_204317) do
-  create_table "posts", force: :cascade do |t|
-    t.string "title"
+ActiveRecord::Schema[7.2].define(version: 2024_10_22_163158) do
+  create_table "replies", force: :cascade do |t|
     t.string "text"
-    t.time "post_created"
+    t.integer "user_id", null: false
+    t.integer "votes"
+    t.integer "post_id", null: false
+    t.integer "reply_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "date_created"
+    t.index ["post_id"], name: "index_replies_on_post_id"
+    t.index ["reply_id"], name: "index_replies_on_reply_id"
+    t.index ["user_id"], name: "index_replies_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -29,4 +33,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_21_204317) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "replies", "posts"
+  add_foreign_key "replies", "replies"
+  add_foreign_key "replies", "users"
 end
