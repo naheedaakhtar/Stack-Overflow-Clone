@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe "posts/new", type: :view do
+  let(:user) { User.create!() }
+
   before(:each) do
     assign(:post, Post.new(
       title: "MyString",
       text: "MyString",
-      user: nil,
+      user_id: user.id,
       votes: 1
     ))
   end
@@ -14,7 +16,6 @@ RSpec.describe "posts/new", type: :view do
     render
 
     assert_select "form[action=?][method=?]", posts_path, "post" do
-
       assert_select "input[name=?]", "post[title]"
 
       assert_select "input[name=?]", "post[text]"

@@ -13,17 +13,33 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/posts", type: :request do
-  
   # This should return the minimal set of attributes required to create a valid
   # Post. As you add validations to Post, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+      title: "Test",
+      text: "Test",
+      user_id: @user[:id],
+      votes: 0
+    }
   }
 
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      title: "Test",
+      text: "Test",
+      user_id: nil,
+      votes: 0
+    }
   }
+  before(:all) do
+    @user=User.create() # creates user necessary for post to be created
+  end
+
+  after(:all) do
+    @user.destroy if @user.present?
+  end
 
   describe "GET /index" do
     it "renders a successful response" do
@@ -87,14 +103,16 @@ RSpec.describe "/posts", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        {
+          votes: 1
+        }
       }
 
       it "updates the requested post" do
         post = Post.create! valid_attributes
         patch post_url(post), params: { post: new_attributes }
         post.reload
-        skip("Add assertions for updated state")
+        expect(post[:votes]).to eq(1)
       end
 
       it "redirects to the post" do

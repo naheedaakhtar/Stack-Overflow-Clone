@@ -1,18 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe "posts/index", type: :view do
+  let(:user) { User.create!() }
   before(:each) do
     assign(:posts, [
       Post.create!(
         title: "Title",
         text: "Text",
-        user: nil,
+        user_id: user.id,
         votes: 2
       ),
       Post.create!(
         title: "Title",
         text: "Text",
-        user: nil,
+        user_id: user.id,
         votes: 2
       )
     ])
