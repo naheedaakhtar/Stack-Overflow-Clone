@@ -1,0 +1,11 @@
+<% content_for :title, "Home" %>
+<div class="homepage-banner">
+  Welcome to the Homepage!
+</div>
+<h1 class="header-title">Stack Overflow Clone</h1>
+
+<div id="home">
+  <%= button_to 'Posts', posts_path, method: :get, class: "custom-button" %>
+  <%= button_to 'Users', users_path, method: :get, class: "custom-button" %>
+  <%= button_to 'Create new Tag', tags_path, method: :get, class: "custom-button" %>
+</div>
