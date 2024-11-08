@@ -7,7 +7,7 @@ RSpec.describe "posts/new", type: :view do
     assign(:post, Post.new(
       title: "MyString",
       text: "MyString",
-      user_id: user.id,
+      user_id: user,
       votes: 1
     ))
   end

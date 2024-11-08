@@ -1,10 +1,21 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @post %>
-
-<div>
-  <%= link_to "Edit this post", edit_post_path(@post) %> |
-  <%= link_to "Back to posts", posts_path %>
-
-  <%= button_to "Destroy this post", @post, method: :delete %>
+<div class="button-row">
+  <%= link_to "Edit this post", edit_post_path(@post), class: "button edit-button" %>
+  <%= link_to "Back to posts", posts_path, class: "button back-button" %>
+  <%= button_to "Destroy this post", @post, method: :delete, class: "button delete-button"%>
+</div>
+<section class="replies">
+  <h3>Replies</h3>
+  <% @post.replies.order(:created_at).each do |reply| %>
+    <%=render reply%>
+    <div class="button-row">
+      <%= link_to "View this reply", reply, class: "view-reply-button" %>
+      <%= link_to "Edit this reply", edit_reply_path(reply), class: "button edit-button"%>
+    </div>
+  <% end %>
+</section>
+<div class= "button-row">
+  <%= link_to "New reply", new_reply_path(@post), class: "button reply-button" %>
 </div>

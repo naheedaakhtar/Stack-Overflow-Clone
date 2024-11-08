@@ -7,5 +7,5 @@
 <br>
 
 <div>
-  <%= link_to "Back to replies", replies_path %>
+  <%= link_to "Back to post", Post.find(@reply.post_id), class: "button back-button" %>
 </div>

@@ -2,8 +2,11 @@ Rails.application.routes.draw do
   resources :replies
   resources :users
   resources :posts
+  resources :posts do
+    resources :replies, only: [ :new, :create, :edit, :update ]
+  end
   resources :tags
-  resources :home, only: [:show]
+  resources :home, only: [ :show ]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

@@ -1,21 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe "replies/index", type: :view do
+  let(:user) { User.create!() }
+  let(:post) { Post.create!(user_id: user.id) }
   before(:each) do
     assign(:replies, [
       Reply.create!(
         text: "Text",
-        user: nil,
-        votes: 2,
-        post: nil,
-        reply: nil
+        user: user,
+        votes: 44,
+        post: post
       ),
       Reply.create!(
         text: "Text",
-        user: nil,
-        votes: 2,
-        post: nil,
-        reply: nil
+        user: user,
+        votes: 44,
+        post: post
       )
     ])
   end
@@ -24,9 +24,6 @@ RSpec.describe "replies/index", type: :view do
     render
     cell_selector = 'div>p'
     assert_select cell_selector, text: Regexp.new("Text".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new(nil.to_s), count: 2
-    assert_select cell_selector, text: Regexp.new(2.to_s), count: 2
-    assert_select cell_selector, text: Regexp.new(nil.to_s), count: 2
-    assert_select cell_selector, text: Regexp.new(nil.to_s), count: 2
+    assert_select cell_selector, text: Regexp.new(44.to_s), count: 2
   end
 end

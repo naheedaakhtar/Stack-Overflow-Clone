@@ -2,9 +2,9 @@
 
 <%= render @reply %>
 
-<div>
-  <%= link_to "Edit this reply", edit_reply_path(@reply) %> |
-  <%= link_to "Back to replies", replies_path %>
+<div class="button-row">
+  <%= link_to "Edit this reply", edit_reply_path(@reply), class: "button edit-button" %> |
+  <%= link_to "Back to post", Post.find(@reply.post_id), class: "button back-button"  %>
 
-  <%= button_to "Destroy this reply", @reply, method: :delete %>
+  <%= button_to "Destroy this reply", @reply, method: :delete, class: "button delete-button" %>
 </div>

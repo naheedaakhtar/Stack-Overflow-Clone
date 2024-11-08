@@ -12,7 +12,8 @@ class RepliesController < ApplicationController
 
   # GET /replies/new
   def new
-    @reply = Reply.new
+    @post= Post.find(params[:format])
+    @reply = @post.replies.new
   end
 
   # GET /replies/1/edit
@@ -21,11 +22,16 @@ class RepliesController < ApplicationController
 
   # POST /replies or /replies.json
   def create
-    @reply = Reply.new(reply_params)
+    @post = Post.find(params[:post_id])
+    @reply = @post.replies.new(reply_params)
+
+    if params[:reply][:parent_reply_id].present?
+      @reply.parent_reply_id = params[:reply][:parent_reply_id]
+    end
 
     respond_to do |format|
       if @reply.save
-        format.html { redirect_to @reply, notice: "Reply was successfully created." }
+        format.html { redirect_to @post, notice: "Reply was successfully created." }
         format.json { render :show, status: :created, location: @reply }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +44,7 @@ class RepliesController < ApplicationController
   def update
     respond_to do |format|
       if @reply.update(reply_params)
-        format.html { redirect_to @reply, notice: "Reply was successfully updated." }
+        format.html { redirect_to @reply.post, notice: "Reply was successfully updated." }
         format.json { render :show, status: :ok, location: @reply }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -65,6 +71,6 @@ class RepliesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def reply_params
-      params.require(:reply).permit(:text, :user_id, :votes, :post_id, :reply_id)
+      params.require(:reply).permit(:text, :user_id, :votes, :post_id, :parent_reply_id)
     end
 end

@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  before(:all) do
+    User.destroy_all
+  end
   describe "model attributes" do
     it "should respond to required attributes methods" do
       user=User.new
