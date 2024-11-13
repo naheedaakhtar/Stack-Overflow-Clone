@@ -1,12 +1,10 @@
 <% content_for :title, "Editing reply" %>
 
-<h1>Editing reply</h1>
+<h1 class="mb-4">Editing Reply</h1>
 
 <%= render "form", reply: @reply %>
 
-<br>
-
-<div>
-  <%= link_to "Show this reply", @reply %>
-  <%= link_to "Back to replies", replies_path, class:"button back-button" %>
+<div class="mt-4">
+  <%= link_to "View this reply", @reply, class: "btn btn-info btn-sm mr-2" %>
+  <%= link_to "Back to replies", replies_path, class: "btn btn-secondary btn-sm" %>
 </div>

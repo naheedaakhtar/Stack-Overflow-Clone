@@ -1,11 +1,9 @@
 <% content_for :title, "New reply" %>
 
-<h1>New reply</h1>
+<h1 class="mb-4">New Reply</h1>
 
 <%= render "form", reply: @reply %>
 
-<br>
-
-<div>
-  <%= link_to "Back to post", Post.find(@reply.post_id), class: "button back-button" %>
+<div class="mt-4">
+  <%= link_to "Back to post", Post.find(@reply.post_id), class: "btn btn-secondary" %>
 </div>

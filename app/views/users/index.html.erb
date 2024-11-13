@@ -2,15 +2,17 @@
 
 <% content_for :title, "Users" %>
 
-<h1>Users</h1>
+<div class="container mt-5">
+  <h1 class="mb-4">Users</h1>
 
-<div id="users">
-  <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
-  <% end %>
+  <div id="users" class="list-group">
+    <% @users.each do |user| %>
+      <div class="list-group-item d-flex justify-content-between align-items-center">
+        <%= render user %>
+        <%= link_to "View this user", user, class: "btn btn-primary btn-sm" %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= link_to "New user", new_user_path, class: "btn btn-success mt-3" %>
 </div>
-
-<%= link_to "New user", new_user_path %>

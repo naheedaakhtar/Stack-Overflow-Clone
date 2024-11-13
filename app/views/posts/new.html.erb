@@ -1,11 +1,14 @@
 <% content_for :title, "New post" %>
 
-<h1>New post</h1>
+<!-- Page Title -->
+<h1 class="text-center my-4">New Post</h1>
 
+<!-- Render the Form Partial -->
 <%= render "form", post: @post %>
 
 <br>
 
-<div>
-  <%= link_to "Back to posts", posts_path %>
+<!-- Link to Back to Posts -->
+<div class="text-center mt-4">
+  <%= link_to "Back to posts", posts_path, class: "btn btn-secondary" %>
 </div>

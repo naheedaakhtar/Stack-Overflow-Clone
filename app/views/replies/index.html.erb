@@ -1,16 +1,20 @@
-<p style="color: green"><%= notice %></p>
+<p class="text-success"><%= notice %></p>
 
 <% content_for :title, "Replies" %>
 
-<h1>Replies</h1>
+<h1 class="mb-4">Replies</h1>
 
-<div id="replies">
+<div id="replies" class="mb-4">
   <% @replies.each do |reply| %>
-    <%= render reply %>
-    <p>
-      <%= link_to "Show this reply", reply %>
-    </p>
+    <div class="card mb-3">
+      <div class="card-body">
+        <%= render reply %>
+        <div class="d-flex justify-content-between align-items-center mt-2">
+          <%= link_to "View this reply", reply, class: "btn btn-info btn-sm" %>
+        </div>
+      </div>
+    </div>
   <% end %>
 </div>
 
-<%= link_to "New reply", new_reply_path %>
+<%= link_to "New reply", new_reply_path, class: "btn btn-primary" %>
