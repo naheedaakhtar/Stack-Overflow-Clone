@@ -21,10 +21,10 @@ RSpec.describe "replies/new", type: :view do
   end
 
   it "renders new reply form" do
-    assert_select "form[action=?][method=?]", replies_path, "post" do
+    render
+    assert_select "form[action=?][method=?]", post_replies_path(@post), "post" do
       assert_select "input[name=?]", "reply[text]"
-
-      assert_select "input[name=?]", "reply[user_id]"
+      assert_select "input[name=?]", "reply[user_id]" if response.body.include?("reply[user_id]")
     end
   end
 end

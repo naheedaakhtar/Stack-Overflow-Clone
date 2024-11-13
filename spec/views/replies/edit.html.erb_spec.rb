@@ -1,35 +1,28 @@
 require 'rails_helper'
 
 RSpec.describe "replies/edit", type: :view do
-  before(:all) do
-    @user=User.create()
-    @post=Post.create(user: @user) # creates post necessary for reply to be created
-  end
+  let!(:user) {User.create!}
+  let!(:post) { Post.create!(user: user) }
 
-  after(:all) do
-    @user.destroy if @user.present?
-    @post.destroy if @post.present?
-  end
-
-  let(:reply) {
+  let!(:reply) {
     Reply.create!(
       text: "MyString",
-      user: @user,
+      user: user,
       votes: 1,
-      post: @post
+      post: post
     )
   }
 
   before(:each) do
     assign(:reply, reply)
+    assign(:post, post)
   end
 
   it "renders the edit reply form" do
     render
-
-    assert_select "form[action=?][method=?]", reply_path(reply), "patch" do
+    assert_select "form[action=?][method=?]", post_reply_path(post,reply), "post" do
+      assert_select "input[name=_method][value=patch]", 1
       assert_select "input[name=?]", "reply[text]"
-
       assert_select "input[name=?]", "reply[votes]"
     end
   end

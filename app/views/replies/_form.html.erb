@@ -1,9 +1,9 @@
-<%= form_with(model: [@post, @reply]) do |form| %>
+<%= form_with(model: [@post, @reply], local:true) do |form| %>
   <% if reply.errors.any? %>
     <div class="alert alert-danger">
       <h4><%= pluralize(reply.errors.count, "error") %> prohibited this reply from being saved:</h4>
       <ul>
-        <% reply.errors.each do |error| %>
+        <% @reply.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -20,6 +20,7 @@
       <%= render @reply.post %>
     </div>
     <%= form.hidden_field :post_id, value: @reply.post_id %>
+
   <% end %>
 
   <div class="form-group">
@@ -32,9 +33,9 @@
       <%= form.label :user_id, class: "form-label" %>
       <%= form.text_field :user_id, class: "form-control" %>
     </div>
-  <% else %>
-    <%= form.hidden_field :user_id, value: @reply.user_id %>
-  <% end %>
+  <%else%>
+    <%= form.hidden_field :user_id, value: @reply.user_id || user.id %>
+  <%end%>
 
   <%= form.hidden_field :votes, value: 0 %>
   <%= form.hidden_field :parent_reply_id, value: @parent_reply&.id %>
