@@ -1,5 +1,29 @@
 <% content_for :title, "Home" %>
+<% if notice %>
+  <div class="alert alert-success" role="alert">
+    <%= notice %>
+  </div>
+<% end %>
 
 <div class="container my-4">
   <h1 class="text-center header-title mb-4">Stack Overflow Clone</h1>
+</div>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card p-4 text-center">
+        <% unless controller_name == 'sessions' %>
+          <% if !current_user %>
+            <h2>Welcome to StackOverflowClone</h2>
+            <p class="lead">Please log in to access all features.</p>
+            <%= button_to "Log in", new_user_session_path, method: :get, class: "btn btn-primary btn-lg" %>
+          <% else %>
+            <h2>Welcome back, <%= current_user.username %>!</h2>
+            <p class="lead">Enjoy exploring new questions and sharing your knowledge.</p>
+            <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-danger btn-lg mt-3" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

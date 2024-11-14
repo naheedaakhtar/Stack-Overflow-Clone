@@ -36,31 +36,25 @@
           <li class="nav-item">
             <%= link_to "Tags", tags_path, class: "nav-link" %>
           </li>
-          <li class="nav-item">
-            <% unless controller_name == 'sessions' %>
-              <% if !current_user %>
-                <%= button_to "Log in", new_user_session_path, method: :get %>
-              <% else %>
+          <% if user_signed_in? %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <%= current_user.username %>
-                <%= button_to "Log out", destroy_user_session_path, method: :delete %>
-              <% end %>
-            <% end %>
-          </li>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><%= link_to "Profile", user_path(current_user), class: "dropdown-item" %></li>
+                <%# <li><%= link_to "Settings", edit_user_registration_path, class: "dropdown-item" </li> can add back later %>
+                <%# <li><%= button_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item text-danger" </li> %>
+              </ul>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "Log in", new_user_session_path, class: "btn btn-outline-primary ms-3" %>
+            </li>
+          <% end %>
         </ul>
       </div>
     </nav>
-    <%# TODO: fix this styling %>
-    <div class = "row">
-      <% unless controller_name == 'sessions' %>
-        <% if !current_user %>
-          <%= button_to "Log in", new_user_session_path, method: :get %>
-        <% else %>
-          <%= current_user.username %>
-          <%= button_to "Log out", destroy_user_session_path, method: :delete %>
-        <% end %>
-      <% end %>
-    </div>
-
     <div class="container mt-5 pt-5">
       <%= yield %>
     </div>
