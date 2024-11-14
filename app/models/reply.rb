@@ -1,4 +1,5 @@
 class Reply < ApplicationRecord
+  include UserAuthorizable
   belongs_to :user
   belongs_to :post
   belongs_to :parent_reply, class_name: "Reply", optional: true

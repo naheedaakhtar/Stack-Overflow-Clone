@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
-  resources :replies
+  devise_for :users
   resources :users
+  resources :replies
   resources :posts
   resources :posts do
     resources :replies, only: [ :new, :create, :edit, :update ]

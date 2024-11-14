@@ -3,7 +3,11 @@
 <%= render @reply %>
 
 <div class="button-row mt-4">
-  <%= link_to "Edit this reply", edit_reply_path(@reply), class: "btn btn-warning btn-sm mr-2" %>
+  <% if @reply.check_user_authorized(current_user) %>
+    <%= link_to "Edit this reply", edit_reply_path(@reply), class: "btn btn-warning btn-sm mr-2" %>
+  <% end %>
   <%= link_to "Back to post", Post.find(@reply.post_id), class: "btn btn-secondary btn-sm mr-2" %>
-  <%= button_to "Destroy this reply", @reply, method: :delete, class: "btn btn-danger btn-sm" %>
+  <% if @reply.check_user_authorized(current_user) %>
+    <%= button_to "Destroy this reply", @reply, method: :delete, class: "btn btn-danger btn-sm" %>
+  <% end %>
 </div>

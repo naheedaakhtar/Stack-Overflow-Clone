@@ -31,17 +31,35 @@
             <%= link_to "Home", root_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to 'Users', users_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
             <%= link_to "Posts", posts_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
             <%= link_to "Tags", tags_path, class: "nav-link" %>
           </li>
+          <li class="nav-item">
+            <% unless controller_name == 'sessions' %>
+              <% if !current_user %>
+                <%= button_to "Log in", new_user_session_path, method: :get %>
+              <% else %>
+                <%= current_user.username %>
+                <%= button_to "Log out", destroy_user_session_path, method: :delete %>
+              <% end %>
+            <% end %>
+          </li>
         </ul>
       </div>
     </nav>
+    <%# TODO: fix this styling %>
+    <div class = "row">
+      <% unless controller_name == 'sessions' %>
+        <% if !current_user %>
+          <%= button_to "Log in", new_user_session_path, method: :get %>
+        <% else %>
+          <%= current_user.username %>
+          <%= button_to "Log out", destroy_user_session_path, method: :delete %>
+        <% end %>
+      <% end %>
+    </div>
 
     <div class="container mt-5 pt-5">
       <%= yield %>
