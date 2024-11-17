@@ -16,11 +16,11 @@
           <% if !current_user %>
             <h2>Welcome to StackOverflowClone</h2>
             <p class="lead">Please log in to access all features.</p>
-            <%= button_to "Log in", new_user_session_path, method: :get, class: "btn btn-primary btn-lg" %>
+            <%= button_to "Log in", new_user_session_path, method: :get, class: "btn btn-primary btn-lg", id: "Log In" %>
           <% else %>
             <h2>Welcome back, <%= current_user.username %>!</h2>
             <p class="lead">Enjoy exploring new questions and sharing your knowledge.</p>
-            <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-danger btn-lg mt-3" %>
+            <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-danger btn-lg mt-3"%>
           <% end %>
         <% end %>
       </div>

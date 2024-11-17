@@ -11,3 +11,5 @@
   User.create!(username: 'user', password: 'password', firstname: 'user', lastname: 'name', email: 'user@colgate.edu', role: 'student')
   User.create!(username: 'prof', password: 'password', firstname: 'professor', lastname: 'professor', email: 'prof@colgate.edu', role: 'instructor')
   User.create!(username: 'admin', password: 'password', firstname: 'admin', lastname: 'admin', email: 'admin@colgate.edu', role: 'admin')
+
+  Tag.create!(name: "", description: "Empty Tag")

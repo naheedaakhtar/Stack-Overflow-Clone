@@ -6,10 +6,12 @@
 
 <div id="tags">
   <% @tags.each do |tag| %>
+    <% if tag.name!= "" %>
     <%= render tag %>
     <p>
       <%= link_to "Show this tag", tag %>
     </p>
+    <% end %>
   <% end %>
 </div>
 

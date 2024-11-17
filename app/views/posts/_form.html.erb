@@ -24,6 +24,11 @@
   <%= form.hidden_field :user_id, value: current_user.id %>
 
   <div class="form-group">
+    <%= form.label :tag_id, class: "form-label" %>
+    <%= form.select :tag_id, Tag.tagNames.map{ |w| [w,Tag.find_by(name: w).id] },{}, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
     <%= form.label :votes, class: "form-label" %>
     <%= form.number_field :votes, class: "form-control" %>
   </div>
