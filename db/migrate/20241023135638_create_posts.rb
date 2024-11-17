@@ -5,7 +5,7 @@ class CreatePosts < ActiveRecord::Migration[7.2]
       t.string :text
       t.integer :votes
       t.references :user, null: false, foreign_key: :true
-      t.references :tag, null: false, foreign_key: :true
+      t.references :tag, null: true, foreign_key: :true
       t.timestamps
     end
   end

@@ -44,7 +44,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_04_210247) do
     t.string "text"
     t.integer "votes"
     t.integer "user_id", null: false
-    t.integer "tag_id", null: false
+    t.integer "tag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tag_id"], name: "index_posts_on_tag_id"

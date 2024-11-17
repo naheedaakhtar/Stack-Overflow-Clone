@@ -3,5 +3,5 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :replies, dependent: :destroy
 
-  belongs_to :tag
+  belongs_to :tag, optional: true
 end

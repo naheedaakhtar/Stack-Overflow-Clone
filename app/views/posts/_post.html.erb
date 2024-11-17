@@ -4,7 +4,7 @@
       <div class="card-body">
         <h2 class="card-title text-center mb-4"><%= post.title %></h2>
         <p class="card-text"><%= post.text %></p>
-        <% if post.tag.name!="" %> <div class= "badge badge-pill badge-info"> <%=  post.tag.name %> </div> <% end %>
+        <% if !post.tag.nil? && post.tag.name!="" %> <div class= "badge badge-pill badge-info"> <%=  post.tag.name %> </div> <% end %>
         <div class="d-flex justify-content-between align-items-center mt-4">
           <p class="text-muted mb-0">Posted by <%= post.user.username %> on <%= post.created_at.strftime("%B %d, %Y") %></p>
           <p class="mb-0">Upvotes: <%= post.votes %></p>
