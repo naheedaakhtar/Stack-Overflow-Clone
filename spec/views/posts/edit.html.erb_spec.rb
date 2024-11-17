@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "posts/edit", type: :view do
-  let(:user) { User.create!() }
+  include Devise::Test::IntegrationHelpers
+  include Devise::Test::ControllerHelpers
+  let(:user) { create(:user) }
 
   let(:post) {
     Post.create!(
@@ -13,6 +15,7 @@ RSpec.describe "posts/edit", type: :view do
   }
 
   before(:each) do
+    sign_in user
     assign(:post, post)
   end
 

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "replies/index", type: :view do
-  let(:user) { User.create!() }
+  let(:user) { create(:user) }
   let(:post) { Post.create!(user_id: user.id) }
   before(:each) do
     assign(:replies, [

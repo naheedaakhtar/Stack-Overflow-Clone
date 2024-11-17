@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "replies/new", type: :view do
   before(:all) do
-    @user=User.create()
+    @user=create(:user)
     @post=Post.create(user: @user) # creates post necessary for reply to be created
   end
 

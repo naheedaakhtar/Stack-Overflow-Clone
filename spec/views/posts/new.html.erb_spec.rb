@@ -1,7 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe "posts/new", type: :view do
-  let(:user) { User.create!() }
+  include Devise::Test::IntegrationHelpers
+  include Devise::Test::ControllerHelpers
+
+  let(:user) { create(:user) }
 
   before(:each) do
     assign(:post, Post.new(
@@ -10,6 +13,7 @@ RSpec.describe "posts/new", type: :view do
       user_id: user,
       votes: 1
     ))
+    sign_in user
   end
 
   it "renders new post form" do

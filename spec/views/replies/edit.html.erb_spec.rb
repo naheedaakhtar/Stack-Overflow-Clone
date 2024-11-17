@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "replies/edit", type: :view do
-  let!(:user) {User.create!}
+  let!(:user) { create(:user) }
   let!(:post) { Post.create!(user: user) }
 
   let!(:reply) {

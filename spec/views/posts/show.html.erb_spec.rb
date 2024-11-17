@@ -1,7 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe "posts/show", type: :view do
-  let(:user) { User.create!() }
+  include Devise::Test::IntegrationHelpers
+  include Devise::Test::ControllerHelpers
+
+  let(:user) { create(:user) }
   before(:each) do
     assign(:post, Post.create!(
       title: "Title",
@@ -9,6 +12,7 @@ RSpec.describe "posts/show", type: :view do
       user_id: user.id,
       votes: 2
     ))
+    sign_in user
   end
 
   it "renders attributes in <p>" do

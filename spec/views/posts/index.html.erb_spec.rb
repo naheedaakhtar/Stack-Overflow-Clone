@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "posts/index", type: :view do
-  let(:user) { User.create!() }
+  let(:user) { create(:user) }
   before(:each) do
     assign(:posts, [
       Post.create!(

@@ -16,9 +16,7 @@ RSpec.describe "/replies", type: :request do
   # This should return the minimal set of attributes required to create a valid
   # Reply. As you add validations to Reply, be sure to
   # adjust the attributes here as well.
-
-  let(:user_instance) { User.create!() }
-  let(:post_instance) { Post.create!(user: user_instance) }
+  include Devise::Test::IntegrationHelpers
 
   let(:valid_attributes) {
     {
@@ -36,8 +34,12 @@ RSpec.describe "/replies", type: :request do
   }
 
   before(:all) do
-    @user=User.create()
+    @user=create(:user)
     @post=Post.create(user: @user) # creates post necessary for reply to be created
+  end
+
+  before(:each) do
+    sign_in @user
   end
 
   after(:all) do
@@ -86,25 +88,25 @@ RSpec.describe "/replies", type: :request do
     context "with valid parameters" do
       it "creates a new Reply" do
         expect {
-          post post_replies_path(post_instance), params: { reply: valid_attributes }
+          post post_replies_path(@post), params: { reply: valid_attributes }
         }.to change(Reply, :count).by(1)
       end
 
       it "redirects to the created reply" do
-        post post_replies_path(post_instance), params: { reply: valid_attributes }
-        expect(response).to redirect_to(reply_url(Reply.last))
+        post post_replies_path(@post), params: { reply: valid_attributes }
+        expect(response).to redirect_to(post_url(@post))
       end
     end
 
     context "with invalid parameters" do
       it "does not create a new Reply" do
         expect {
-          post post_replies_path(post_instance), params: { reply: invalid_attributes }
+          post post_replies_path(@post), params: { reply: invalid_attributes }
         }.to change(Reply, :count).by(0)
       end
 
       it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post post_replies_path(post_instance), params: { reply: invalid_attributes }
+        post post_replies_path(@post), params: { reply: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
       end
     end
