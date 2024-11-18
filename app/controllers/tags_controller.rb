@@ -49,7 +49,7 @@ class TagsController < ApplicationController
 
   # DELETE /tags/1 or /tags/1.json
   def destroy
-    #@tag.icon.purge
+    # @tag.icon.purge
     @tag.posts.each do |post|
       post.tag = Tag.find_by(name: "")
       post.save!

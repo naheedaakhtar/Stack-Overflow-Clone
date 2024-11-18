@@ -2,13 +2,13 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   # Configure 'rails notes' to inspect Cucumber files
-  config.annotations.register_directories('features')
-  config.annotations.register_extensions('feature') { |tag| /#\s*(#{tag}):?\s*(.*)$/ }
+  config.annotations.register_directories("features")
+  config.annotations.register_extensions("feature") { |tag| /#\s*(#{tag}):?\s*(.*)$/ }
 
   # Settings specified here will take precedence over those in config/application.rb.
 
-  #For codespaces being able to use the test server properly
-  if ENV['GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN'] =='app.github.dev'
+  # For codespaces being able to use the test server properly
+  if ENV["GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN"] =="app.github.dev"
 
     config.action_controller.forgery_protection_origin_check = false
 

@@ -20,7 +20,7 @@ RSpec.describe "replies/edit", type: :view do
 
   it "renders the edit reply form" do
     render
-    assert_select "form[action=?][method=?]", post_reply_path(post,reply), "post" do
+    assert_select "form[action=?][method=?]", post_reply_path(post, reply), "post" do
       assert_select "input[name=_method][value=patch]", 1
       assert_select "input[name=?]", "reply[text]"
       assert_select "input[name=?]", "reply[votes]"
