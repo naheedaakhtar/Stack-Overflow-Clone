@@ -43,8 +43,7 @@
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 <li><%= link_to "Profile", user_path(current_user), class: "dropdown-item" %></li>
-                <%# <li><%= link_to "Settings", edit_user_registration_path, class: "dropdown-item" </li> can add back later %>
-                <%# <li><%= button_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item text-danger" </li> %>
+                <li><%= button_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item text-danger" %></li>
               </ul>
             </li>
           <% else %>
@@ -55,7 +54,19 @@
         </ul>
       </div>
     </nav>
+
+    <!-- Flash message container -->
     <div class="container mt-5 pt-5">
+      <% if flash.any? %>
+        <div id="flash-messages">
+          <% flash.each do |key, message| %>
+            <div class="alert alert-<%= key == 'notice' ? 'success' : key == 'alert' ? 'danger' : 'info' %> alert-dismissible fade show" role="alert">
+              <%= message %>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
       <%= yield %>
     </div>
   </body>

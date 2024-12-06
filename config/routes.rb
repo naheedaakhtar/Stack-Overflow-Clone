@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :users
+  resources :users, only: [ :show, :edit, :update, :index ]
   resources :replies
   resources :posts
   resources :posts do
