@@ -18,6 +18,11 @@ class PostsController < ApplicationController
 
   # GET /posts/1/edit
   def edit
+    @post = Post.find(params[:id])
+    respond_to do |format|
+      format.html # Default behavior for non-Turbo requests
+      format.turbo_stream { render partial: "posts/form", locals: { post: @post } }
+    end
   end
 
   # POST /posts or /posts.json

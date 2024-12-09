@@ -153,10 +153,12 @@ RSpec.describe "/replies", type: :request do
       }.to change(Reply, :count).by(-1)
     end
 
-    it "redirects to the replies list" do
-      reply = Reply.create! valid_attributes
+    it "deletes the reply and redirects to the post path" do
+      reply = Reply.create!(valid_attributes)
+      expect(Reply.exists?(reply.id)).to be_truthy
       delete reply_url(reply)
-      expect(response).to redirect_to(replies_url)
+      expect(response).to redirect_to(post_path(reply.post))
+      expect(Reply.exists?(reply.id)).to be_falsey
     end
   end
 end

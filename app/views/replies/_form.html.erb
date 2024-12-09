@@ -1,46 +1,39 @@
-<%= form_with(model: [@post, @reply], local:true) do |form| %>
-  <% if reply.errors.any? %>
-    <div class="alert alert-danger">
-      <h4><%= pluralize(reply.errors.count, "error") %> prohibited this reply from being saved:</h4>
-      <ul>
-        <% @reply.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <% if @post %>
-    <div class="post-details mb-4">
-      <%= render @post %>
-    </div>
-    <%= form.hidden_field :post_id, value: @post.id %>
-  <% else %>
-    <div class="post-details mb-4">
-      <%= render @reply.post %>
-    </div>
-    <%= form.hidden_field :post_id, value: @reply.post_id %>
-
-  <% end %>
-
-  <div class="form-group">
-    <%= form.label :text, class: "form-label" %>
-    <%= form.text_field :text, class: "form-control" %>
-  </div>
-
-  <% if @reply.user_id.nil? %> 
-    <div class="form-group">
-      <%= form.label :user_id, class: "form-label" %>
-      <%= form.text_field :user_id, class: "form-control" %>
-    </div>
-  <%else%>
-    <%= form.hidden_field :user_id, value: @reply.user_id || user.id %>
-  <%end%>
-
-  <%= form.hidden_field :votes, value: 0 %>
-  <%= form.hidden_field :parent_reply_id, value: @parent_reply&.id %>
-
-  <div class="form-group text-center">
-    <%= form.submit "Submit Reply", class: "btn btn-primary" %>
-  </div>
+<% if reply.persisted? %>
+  <turbo-frame id="reply_edit_<%= @reply.id %>" class="mt-4">
+<% else %>
+  <div class="mt-4">
 <% end %>
+  <%= form_with(model: [@post, @reply], local: true) do |form| %>
+    <% if reply.errors.any? %>
+      <div class="alert alert-danger">
+        <h4><%= pluralize(reply.errors.count, "error") %> prohibited this reply from being saved:</h4>
+        <ul>
+          <% reply.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <% if @post %>
+      <%= form.hidden_field :post_id, value: @post.id %>
+    <% else %>
+      <%= form.hidden_field :post_id, value: @reply.post_id %>
+    <% end %>
+
+    <div class="form-group mb-3">
+      <%= form.label :text, class: "form-label fw-bold" %>
+      <%= form.text_area :text, class: "form-control", rows: 4 %>
+    </div>
+
+    <%= form.hidden_field :user_id, value: current_user.id %>
+    <%= form.hidden_field :votes, value: 0 %>
+    <%= form.hidden_field :parent_reply_id, value: @parent_reply&.id %>
+
+    <div class="form-group text-center">
+      <%= form.submit "Submit Reply", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+  <% if reply.persisted? %>
+  </turbo-frame>
+  <%end%>

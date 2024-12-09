@@ -3,10 +3,20 @@
     <div class="card-body">
       <p class="card-text"><%= reply.text %></p>
       <p class="card-footer text-muted">
-        Replied by <%= reply.user.username %> on <%= reply.created_at.strftime("%B %d, %Y") %>
+        Replied by <%= reply.user&.username || "Unknown user" %> on <%= reply.created_at.strftime("%B %d, %Y") %>
       </p>
-      <div class="d-flex justify-content-between align-items-center">
-        <p class="mb-0">Upvotes: <%= reply.votes %></p>
+      <div class="d-flex justify-content-between align-items-center mt-3">
+        <p class="mb-0">Upvotes: <%= reply.votes || 0 %></p>
+        <% if reply.check_user_authorized(current_user) %>
+          <div class="button-row text-center mt-4">
+            <turbo-frame id="reply_edit_<%= reply.id %>" class="d-inline-block">
+              <%= link_to "Edit this reply", edit_reply_path(reply), class: "btn btn-warning btn-sm mr-2", title: "Edit your reply" %>
+            </turbo-frame>
+            <turbo-frame id="delete_reply_<%= reply.id %>">
+              <%= button_to "Destroy this reply", reply, method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "Are you sure you want to delete this reply?" }, title: "Delete this reply" %>
+            </turbo-frame>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

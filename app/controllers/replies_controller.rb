@@ -19,6 +19,11 @@ class RepliesController < ApplicationController
 
   # GET /replies/1/edit
   def edit
+    @reply = Reply.find(params[:id])
+    respond_to do |format|
+      format.html # Default behavior for non-Turbo requests
+      format.turbo_stream { render partial: "replies/form", locals: { post: @reply } }
+    end
   end
 
   # POST /replies or /replies.json
@@ -56,13 +61,18 @@ class RepliesController < ApplicationController
 
   # DELETE /replies/1 or /replies/1.json
   def destroy
-    @reply.destroy!
+    @reply = Reply.find(params[:id])
+    @post = @reply.post
+    @reply.destroy
 
     respond_to do |format|
-      format.html { redirect_to replies_path, status: :see_other, notice: "Reply was successfully destroyed." }
-      format.json { head :no_content }
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.remove(@reply)
+      end
+      format.html { redirect_to post_path(@post), notice: "Reply was successfully deleted." }
     end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

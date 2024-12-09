@@ -1,9 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "replies/index", type: :view do
-  let(:user) { create(:user) }
+  include Devise::Test::IntegrationHelpers
+  include Devise::Test::ControllerHelpers
+  let!(:user) { create(:user) }
   let(:post) { Post.create!(user_id: user.id) }
   before(:each) do
+    sign_in user
     assign(:replies, [
       Reply.create!(
         text: "Text",

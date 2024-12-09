@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe "replies/show", type: :view do
+  include Devise::Test::IntegrationHelpers
   include Devise::Test::ControllerHelpers
 
-  let(:user) { create(:user, username: 'joeschmoe') }
+  let!(:user) { create(:user, username: 'joeschmoe') }
   let(:post) { Post.create!(user_id: user.id) }
   before(:each) do
+    sign_in user
     assign(:reply, Reply.create!(
       text: "Text",
       user: user,
