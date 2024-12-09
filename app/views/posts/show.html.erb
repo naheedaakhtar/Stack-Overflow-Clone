@@ -20,7 +20,7 @@
 
 <section class="replies mt-5">
   <h3>Replies</h3>
-  <% @post.replies.order(:created_at).each do |reply| %>
+  <% @post.replies.order(votes: :desc).each do |reply| %>
     <%= render reply %>
   <% end %>
 </section>
