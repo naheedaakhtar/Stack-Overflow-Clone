@@ -50,10 +50,6 @@ class TagsController < ApplicationController
   # DELETE /tags/1 or /tags/1.json
   def destroy
     # @tag.icon.purge
-    @tag.posts.each do |post|
-      post.tag = Tag.find_by(name: "")
-      post.save!
-    end
     @tag.destroy!
     respond_to do |format|
       format.html { redirect_to tags_path, status: :see_other, notice: "Tag was successfully destroyed." }

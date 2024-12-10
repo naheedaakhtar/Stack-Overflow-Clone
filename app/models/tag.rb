@@ -4,7 +4,7 @@ class Tag < ApplicationRecord
         icon.variant :medium, resize_to_limit: [ 240, 240 ]
     end
 
-    has_many :posts
+    has_and_belongs_to_many :posts
 
     def self.tagNames
         Tag.all.distinct.pluck(:name)

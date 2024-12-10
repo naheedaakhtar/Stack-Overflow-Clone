@@ -24,3 +24,8 @@
 .button-row .btn {
   margin: 0;
 }
+.custom-badge-color {
+  background-color: #e0f7fa; /* Light cyan */
+  color: #007bff; /* Dark blue for hyperlink */
+}
+

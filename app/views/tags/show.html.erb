@@ -1,5 +1,6 @@
 <p style="color: green"><%= notice %></p>
 
+
 <%= render @tag %>
 
 <div>
@@ -18,8 +19,14 @@
         <div class="card-body">
           <h5 class="card-title"><%= post.title %></h5>
           <p class="card-text"><%= post.text.truncate(100) %></p>
-          <% if post.tag.name!="" %> <div class= "badge badge-pill badge-info"> <%=  post.tag.name %> </div><br> <br><% end %>
+          <% if !post.tags.nil? %>
+          <% post.tags.each do |tag| %>
+          <div class= "badge badge-pill badge-info"> <%=  link_to tag.name, tag %> </div> 
+          <% end %>         
+          <br>
+          <% end %> 
           <%= link_to "View this post", post, class: "btn btn-primary" %>
+
         </div>
       </div>
     </div>

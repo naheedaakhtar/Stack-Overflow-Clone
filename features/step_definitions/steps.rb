@@ -26,8 +26,9 @@ end
 
 
 When('I select the {string} tag') do |tag|
-    select tag, from: "Tag"
+    check tag
 end
+
 
 When('I create the post') do
     click_on "Save Post"
