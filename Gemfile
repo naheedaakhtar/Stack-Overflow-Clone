@@ -30,6 +30,7 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
+gem 'sidekiq', '~>6.5.5'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -67,3 +68,7 @@ gem "dockerfile-rails", ">= 1.6", group: :development
 gem "aws-sdk-s3", "~> 1.172", require: false
 
 gem "rails-controller-testing"
+
+gem "whenever", "~> 1.0"
+
+gem "sidekiq-cron", "~> 2.0"

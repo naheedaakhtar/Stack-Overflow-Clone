@@ -38,5 +38,7 @@ module StackOverflowClone
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.active_job_queue_adapter = :sidekiq
   end
 end
