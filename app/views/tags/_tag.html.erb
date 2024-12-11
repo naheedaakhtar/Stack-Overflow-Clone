@@ -1,22 +1,4 @@
-<div id="<%= dom_id tag %>">
-  <p>
-    <strong>Name:</strong>
-    <%= tag.name %>
-  </p>
 
-  <p>
-    <strong>Description</strong>
-    <%= tag.description%>
-  </p>
-
-  <p>
-
-  <!-- detached for now as images not rendering properly, also pdfs crash it, so want to figure out how to limit input first. Also would want to be able to detach in form-->
-  <p>
-    <% if false %>
-      <%= image_tag tag.icon.variant(:medium)%>
-    <% end %>
-  <p>
+<div class= "badge badge-pill custom-badge-color"> <%= link_to tag.name,tag %> </div>
 
   
-</div>

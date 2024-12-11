@@ -1,7 +1,16 @@
 <p style="color: green"><%= notice %></p>
 
 
-<%= render @tag %>
+<p>
+<strong>Name:</strong>
+<%= @tag.name %>
+</p>
+
+<p>
+<strong>Description</strong>
+<%= @tag.description%>
+</p>
+
 
 <div>
   <%= link_to "Edit this tag", edit_tag_path(@tag) %> |
@@ -21,7 +30,7 @@
           <p class="card-text"><%= post.text.truncate(100) %></p>
           <% if !post.tags.nil? %>
           <% post.tags.each do |tag| %>
-          <div class= "badge badge-pill badge-info"> <%=  link_to tag.name, tag %> </div> 
+            <%= render partial: tag %>  
           <% end %>         
           <br>
           <% end %> 
