@@ -23,7 +23,22 @@
 
   <br>
   <div id="posts" class="row">  <% @tag.posts.each do |post| %>
-    <%= render partial: "post_preview", locals: {post: post} %>
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title"><%= post.title %></h5>
+          <p class="card-text"><%= post.text.truncate(100) %></p>
+          <% if !post.tags.nil? %>
+          <% post.tags.each do |tag| %>
+            <%= render partial: tag %>  
+          <% end %>         
+          <br>
+          <% end %> 
+          <%= link_to "View this post", post, class: "btn btn-primary" %>
+
+        </div>
+      </div>
+    </div>
   <% end %>
 </div>
 </div>
