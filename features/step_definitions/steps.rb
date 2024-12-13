@@ -58,3 +58,45 @@ end
 When('I look at the {string} page') do |tag|
     visit tag_path(Tag.find_by(name: tag))
 end
+
+
+Given('these posts exist:') do |table|
+  # table is a Cucumber::MultilineArgument::DataTable
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Given('I request certification') do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Given('certification is approved by a moderator') do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Given('I am on post {string}') do |string|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+When('I leave a reply') do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Given('I leave a reply') do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+When('I request certification') do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+When('certification is approved by a moderator') do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+When('I am on post {string}') do |string|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+When('certification is denied by a moderator') do
+  pending # Write code here that turns the phrase above into concrete actions
+end

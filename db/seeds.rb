@@ -10,6 +10,8 @@
 
   @user1=User.create!(username: 'user', password: 'password', firstname: 'User', lastname: 'Lastname', email: 'user@colgate.edu', role: 'student')
   @user2=User.create!(username: 'prof', password: 'password', firstname: 'professor', lastname: 'Schmoe', email: 'prof@colgate.edu', role: 'instructor')
+  @user_cred2 = UserCred.create!(user_id: @user2.id, approved: true)
+
   @user3=User.create!(username: 'admin', password: 'password', firstname: 'admin', lastname: 'admin', email: 'admin@colgate.edu', role: 'admin')
   @user4=User.create!(username: 'jschmoe', password: 'password', firstname: 'Joe', lastname: 'Schmoe', email: 'jschmoe@colgate.edu', role: 'student')
   @user5=User.create!(username: 'jdoe', password: 'password', firstname: 'John', lastname: 'Doe', email: 'jdoe@colgate.edu', role: 'student')
@@ -31,7 +33,7 @@
   Tag.create!(name: "Semantic Error", description: "Questions asking about programs producing unexpected output")
   Tag.create!(name: "Runtime Error", description: "Questions asking about programs producing errors at runtime")
 
-
+  Tag.create!(name: "Instructor Response", description: "Posts where an instructor has responded")
   @post1=Post.create!(
     title: "Issue running rails db:seed",
     text: "I am running into this issue when I try and run rails db:seed bin/rails aborted! ActiveRecord::RecordInvalid: Validation failed: Email has already been taken (ActiveRecord::RecordInvalid)",

@@ -7,4 +7,9 @@ class User < ApplicationRecord
   enum :role, %i[admin student instructor]
   has_many :posts, dependent: :destroy
   has_many :replies, dependent: :destroy
+  has_one :user_cred
+  def approved?
+    return false if self.user_cred.nil?
+    self.user_cred.approved
+  end
 end

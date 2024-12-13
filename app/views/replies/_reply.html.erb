@@ -1,6 +1,9 @@
 <div id="<%= dom_id reply %>" class="mb-4">
   <div class="card">
     <div class="card-body">
+      <% if reply.user.approved? %>
+        <%= render Tag.approved %>
+      <% end %>
       <p class="card-text"><%= reply.text %></p>
       <p class="card-footer text-muted">
         Replied by <%= reply.user&.username || "Unknown user" %> on <%= reply.created_at.strftime("%B %d, %Y") %>

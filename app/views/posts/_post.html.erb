@@ -4,12 +4,10 @@
       <div class="card-body">
         <h2 class="card-title text-center mb-4"><%= post.title %></h2>
         <p class="card-text"><%= post.text %></p>
-        <% if !post.tags.nil? %>
-        <% post.tags.each do |tag| %>
+        <% post.get_tags.each do |tag| %>
           <%= render partial: tag %>  
         <% end %>
         <br>
-        <% end %>
         <div class="d-flex justify-content-between align-items-center mt-4">
           <p class="text-muted mb-0">Posted by <%= post.user.username %> on <%= post.created_at.strftime("%B %d, %Y") %></p>
           <p class="mb-0">Upvotes: <%= post.votes %></p>

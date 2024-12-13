@@ -1,4 +1,7 @@
 
+<% if tag == Tag.approved %>
+    <div class= "badge badge-pill custom-badge-color text-success"> <%= tag.name %> </div>
+<% else %>
 <div class= "badge badge-pill custom-badge-color"> <%= link_to tag.name,tag %> </div>
-
+<% end %>
   

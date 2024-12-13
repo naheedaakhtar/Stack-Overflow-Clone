@@ -13,7 +13,7 @@
     </tr>
   </thead>
   <tbody>
-  <% @tags.each do |tag| %>
+  <% Tag.choosable_tags.each do |tag| %>
     <tr>
     <% if tag.name!= "" %>
     <td> <%= tag.name %>

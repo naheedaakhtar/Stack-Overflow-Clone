@@ -1,0 +1,29 @@
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+      <th>User</th>
+      <th>Name</th>
+      <th>School</th>
+      <th>Details</th>
+      <th>Approve/Deny<th>
+      </tr>
+    </thead>
+    <tbody id="user_cred_table">
+      <% @user_creds.each do |user_cred| %>
+      <tr> 
+        <td> <%= user_cred.user.username%> 
+        <td> <%= user_cred.name %>
+        <td> <%= user_cred.school%>
+        <td> <%= user_cred.details %>
+        <td>
+        <%= button_to "Approve", user_cred_approve_path(user_cred), method: :put, class: 'btn btn-secondary' %>
+        <%= button_to "Delete", user_cred_path(user_cred), method: :delete, class: "btn btn-warning" %> 
+        </td>
+      </tr>
+      <% end%>
+    </tbody>
+  </table>
+
+  <%= link_to "Back to posts", posts_path, class: "btn btn-secondary" %> <br>
+</div>
