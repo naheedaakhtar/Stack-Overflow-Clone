@@ -7,7 +7,7 @@ class Tag < ApplicationRecord
     has_and_belongs_to_many :posts
 
     def self.approved
-        Tag.find_by(name: "Instructor Response") 
+        Tag.find_by(name: "Instructor Response")
     end
 
     def self.choosable_tags

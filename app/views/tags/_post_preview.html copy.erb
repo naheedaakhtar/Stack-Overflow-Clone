@@ -3,9 +3,9 @@
         <div class="card-body">
           <h5 class="card-title"><%= post.title %></h5>
           <p class="card-text"><%= post.text.truncate(100) %></p>
-          <% if !post.tags.nil? %>
+          <% if !post.tags.any? %>
           <% post.tags.each do |tag| %> 
-            <%= render partial: tag %>  
+            <%= render partial: "tags/tag", locals: { tag: tag } %>
           <% end %>
           <br>
           <% end %>
