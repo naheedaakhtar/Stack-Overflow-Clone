@@ -4,7 +4,7 @@
   </div>
 <% end %>
 
-<%= render @post %>
+<%= render partial: "posts/post", locals: {post: @post, show_save_button: true} %>
 
 <div class="button-row mb-4 d-flex justify-content-between align-items-center">
   <% if @post.check_user_authorized(current_user) %>

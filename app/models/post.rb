@@ -3,6 +3,8 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :replies, dependent: :destroy
 
+  has_many :saved_posts,  dependent: :destroy
+  has_many :users_saved, through: :saved_posts, source: :user
   has_and_belongs_to_many :tags, optional: true
 
   def self.search_by_query(query, tag_ids = [])

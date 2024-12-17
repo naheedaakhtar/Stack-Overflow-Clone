@@ -26,6 +26,7 @@ RSpec.describe "replies/new", type: :view do
 
   it "renders new reply form" do
     render
+    puts response.body
     assert_select "form[action=?][method=?]", post_replies_path(@post), "post" do
       assert_select "textarea[name=?]", "reply[text]"
       assert_select "input[name=?]", "reply[user_id]"

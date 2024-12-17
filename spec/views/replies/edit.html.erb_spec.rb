@@ -18,6 +18,7 @@ RSpec.describe "replies/edit", type: :view do
 
   before(:each) do
     sign_in user
+    allow(user).to receive(:saved_posts_records).and_return([post])
     assign(:reply, reply)
     assign(:post, post)
   end

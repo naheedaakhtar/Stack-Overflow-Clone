@@ -3,6 +3,10 @@ class UsersController < ApplicationController
   before_action :set_user, only: [ :show, :edit, :update ]
   # GET /users/1 or /users/1.json
   def show
+    @user = User.find(params[:id])
+    @posts= @user.posts 
+    @saved_posts = @user.saved_posts_records
+    @overview_posts= (@posts + @saved_posts).uniq
   end
 
   # PATCH/PUT /users/1 or /users/1.json
