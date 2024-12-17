@@ -19,7 +19,6 @@ RSpec.describe "replies/new", type: :view do
     assign(:reply, Reply.new(
       text: "MyString",
       user: @user,
-      votes: 1,
       post: @post
     ))
   end

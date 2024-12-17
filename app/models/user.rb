@@ -7,6 +7,7 @@ class User < ApplicationRecord
   enum :role, %i[admin student instructor]
   has_many :posts, dependent: :destroy
   has_many :replies, dependent: :destroy
+  has_many :votes, dependent: :destroy
   has_many :saved_posts
   has_many :saved_posts_records, through: :saved_posts, source: :post
   has_one :user_cred

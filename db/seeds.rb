@@ -38,6 +38,11 @@
     title: "Issue running rails db:seed",
     text: "I am running into this issue when I try and run rails db:seed bin/rails aborted! ActiveRecord::RecordInvalid: Validation failed: Email has already been taken (ActiveRecord::RecordInvalid)",
     user: @user4,
+    tag: @rails_tag,
+    created_at: Time.new(2024, 12, 6, 14, 30))
+  Reply.create!(post: @post1, text: "Try running rails db:drop db:create db:migrate db:seed", user: @user5, created_at: Time.new(2024, 12, 6, 16, 45))
+  Reply.create!(post: @post1, text: "This issue requires you to completely delete your entire project. This is a symptom a greater issue with the project that requires it to be completely remade", user: @user2, created_at: Time.new(2024, 12, 6, 20, 11))
+  Reply.create!(post: @post1, text: "I have no clue", user: @user3, created_at: Time.new(2024, 12, 6, 21, 43))
     votes: 522,
     created_at: Time.new(2024, 12, 6, 14, 30))
   @post1.tags <<  @rails_tag
@@ -51,6 +56,11 @@
     title: "How to debug undefined method error in Ruby",
     text: "I'm working on a Ruby script and keep getting an undefined method error for a method that clearly exists. Any ideas?",
     user: @user1,
+    tag: @ruby_tag,
+    created_at: Time.new(2024, 12, 5, 10, 15)
+  )
+  Reply.create!(post: @post2, text: "Ensure you have required the file containing the method.", user: @user2, created_at: Time.new(2024, 12, 5, 11, 45))
+  Reply.create!(post: @post2, text: "Sometimes the method's name might be misspelled. Double-check your code.", user: @user5, created_at: Time.new(2024, 12, 5, 13, 20))
     votes: 15,
     created_at: Time.new(2024, 12, 5, 10, 15)
   )
@@ -63,6 +73,13 @@
     title: "Why is my Python script slow?",
     text: "I have a Python script processing a large dataset, but it takes hours to run. How can I speed it up?",
     user: @user6,
+    tag: @python_tag,
+    created_at: Time.new(2024, 12, 4, 9, 30)
+  )
+  Reply.create!(post: @post3, text: "Consider using NumPy or pandas for optimized data processing.", user: @user4, created_at: Time.new(2024, 12, 4, 10, 15))
+  Reply.create!(post: @post3, text: "If you are doing repetitive operations, use caching or memoization.", user: @user1, created_at: Time.new(2024, 12, 4, 11, 00))
+  Reply.create!(post: @post3, text: "Your version of python is obviously corrupted in some way. You need to reinstall it completely", user: @user2, created_at: Time.new(2024, 12, 4, 11, 00))
+  Reply.create!(post: @post3, text: "Windows is having an issue processing your python file due to a file issue. Delete the system32 file", user: @user3, created_at: Time.new(2024, 12, 4, 11, 00))
     votes: 120,
     created_at: Time.new(2024, 12, 4, 9, 30)
   )
@@ -77,6 +94,98 @@
     title: "Why does my SQL query return unexpected results?",
     text: "I am trying to join two tables, but the query returns more rows than expected. What could be causing this?",
     user: @user2,
+    tag:  @sql_tag,
+    created_at: Time.new(2024, 12, 3, 14, 45)
+  )
+  Reply.create!(post: @post4, text: "Make sure you're using the correct type of join for your use case.", user: @user4, created_at: Time.new(2024, 12, 3, 15, 30))
+  Reply.create!(post: @post4, text: "Check if there are duplicate rows in your tables that might cause the issue.", user: @user5, created_at: Time.new(2024, 12, 3, 16, 00))
+  Reply.create!(post: @post4, text: "Use SELECT * FROM table1, table2 without a WHERE clause for better results.", user: @user3, created_at: Time.new(2024, 12, 3, 17, 00))
+  Reply.create!(post: @post4, text: "You probably need to reinstall your database software.", user: @user1, created_at: Time.new(2024, 12, 3, 18, 00))
+  Reply.create!(post: @post4, text: "Joining tables will never work; you need to rewrite your entire application.", user: @user3, created_at: Time.new(2024, 12, 3, 19, 00))
+
+  10.times do |i|
+    Vote.create!(user: User.all.sample, votable: @post1, vote_type: :up)
+  end
+
+  12.times do |i|
+    Vote.create!(user: User.all.sample, votable: @post2, vote_type: :up)
+  end
+
+  27.times do |i|
+    Vote.create!(user: User.all.sample, votable: @post3, vote_type: :up)
+  end
+
+  19.times do |i|
+    Vote.create!(user: User.all.sample, votable: @post4, vote_type: :up)
+  end
+
+  13.times do |i|
+    Vote.create!(user: User.all.sample, votable: Reply.find_by(post: @post1, text: "Try running rails db:drop db:create db:migrate db:seed"), vote_type: :up)
+  end
+
+  9.times do |i|
+    Vote.create!(user: User.all.sample, votable: Reply.find_by(post: @post1, text: "This issue requires you to completely delete your entire project. This is a symptom a greater issue with the project that requires it to be completely remade"), vote_type: :down)
+  end
+
+  5.times do |i|
+    Vote.create!(user: User.all.sample, votable: Reply.find_by(post: @post1, text: "I have no clue"), vote_type: :down)
+  end
+
+  17.times do |i|
+    Vote.create!(user: User.all.sample, votable: Reply.find_by(post: @post2, text: "Ensure you have required the file containing the method."), vote_type: [:up, :down].shuffle.first)
+  end
+
+  15.times do |i|
+    Vote.create!(user: User.all.sample, votable: Reply.find_by(post: @post2, text: "Sometimes the method's name might be misspelled. Double-check your code."), vote_type: [:up, :down].shuffle.first)
+  end
+
+  10.times do |i|
+    Vote.create!(user: User.all.sample, votable: Reply.find_by(post: @post3, text: "Consider using NumPy or pandas for optimized data processing."), vote_type: [:up, :down].shuffle.first)
+  end
+
+  15.times do |i|
+    Vote.create!(user: User.all.sample, votable: Reply.find_by(post: @post3, text: "If you are doing repetitive operations, use caching or memoization."), vote_type: [:up, :down].shuffle.first)
+  end
+
+  5.times do |i|
+    Vote.create!(user: User.all.sample, votable: Reply.find_by(post: @post3, text: "Your version of python is obviously corrupted in some way. You need to reinstall it completely"), vote_type: [:up, :down].shuffle.first)
+  end
+
+  9.times do |i|
+    Vote.create!(user: User.all.sample, votable: Reply.find_by(post: @post3, text: "Windows is having an issue processing your python file due to a file issue. Delete the system32 file"), vote_type: :down)
+  end
+
+  15.times do |i|
+    Vote.create!(user: User.all.sample, votable: Reply.find_by(post: @post4, text: "Make sure you're using the correct type of join for your use case."), vote_type: [:up, :down].shuffle.first)
+  end
+
+  10.times do |i|
+    Vote.create!(user: User.all.sample, votable: Reply.find_by(post: @post4, text: "Check if there are duplicate rows in your tables that might cause the issue."), vote_type: [:up, :down].shuffle.first)
+  end
+
+  8.times do |i|
+    Vote.create!(user: User.all.sample, votable: Reply.find_by(post: @post4, text: "Use SELECT * FROM table1, table2 without a WHERE clause for better results."), vote_type: [:up, :down].shuffle.first)
+  end
+
+  5.times do |i|
+    Vote.create!(user: User.all.sample, votable: Reply.find_by(post: @post4, text: "You probably need to reinstall your database software."), vote_type: :down)
+  end
+
+  3.times do |i|
+    Vote.create!(user: User.all.sample, votable: Reply.find_by(post: @post4, text: "Joining tables will never work; you need to rewrite your entire application."), vote_type: :down)
+  end
+  8.times do |i|
+    Vote.create!(user: User.all.sample, votable: Reply.find_by(post: @post2, text: "Ensure you have required the file containing the method."), vote_type: :up)
+  end
+  10.times do |i|
+    Vote.create!(user: User.all.sample, votable: @post1, vote_type: [:up, :down].sample)
+  end
+  
+  8.times do |i|
+    Vote.create!(user: User.all.sample, votable: @post4, vote_type: [:up, :down].sample)
+  end
+    
+
     votes: 78,
     created_at: Time.new(2024, 12, 3, 14, 45)
   )

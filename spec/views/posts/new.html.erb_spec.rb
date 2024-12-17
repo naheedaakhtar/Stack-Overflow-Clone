@@ -10,8 +10,7 @@ RSpec.describe "posts/new", type: :view do
     assign(:post, Post.new(
       title: "MyString",
       text: "MyString",
-      user: user, # Ensure user is assigned as a valid user object
-      votes: 1
+      user_id: user,
     ))
     sign_in user
   end
@@ -23,7 +22,6 @@ RSpec.describe "posts/new", type: :view do
       assert_select "input[name=?]", "post[title]"
       assert_select "textarea[name=?]", "post[text]"
       assert_select "input[name=?]", "post[user_id]"
-      assert_select "input[name=?]", "post[votes]"
     end
   end
 end

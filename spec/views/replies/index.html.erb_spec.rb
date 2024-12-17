@@ -11,13 +11,11 @@ RSpec.describe "replies/index", type: :view do
       Reply.create!(
         text: "Text",
         user: user,
-        votes: 44,
         post: post
       ),
       Reply.create!(
         text: "Text",
         user: user,
-        votes: 44,
         post: post
       )
     ])
@@ -27,6 +25,5 @@ RSpec.describe "replies/index", type: :view do
     render
     cell_selector = 'div>p'
     assert_select cell_selector, text: Regexp.new("Text".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new(44.to_s), count: 2
   end
 end

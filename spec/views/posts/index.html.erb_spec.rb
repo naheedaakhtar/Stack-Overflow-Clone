@@ -8,13 +8,11 @@ RSpec.describe "posts/index", type: :view do
         title: "Title",
         text: "Text",
         user_id: user.id,
-        votes: 2
       ),
       Post.create!(
         title: "Title",
         text: "Text",
         user_id: user.id,
-        votes: 2
       )
     ])
   end

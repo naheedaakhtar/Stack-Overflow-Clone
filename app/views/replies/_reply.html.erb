@@ -9,7 +9,23 @@
         Replied by <%= reply.user&.username || "Unknown user" %> on <%= reply.created_at.strftime("%B %d, %Y") %>
       </p>
       <div class="d-flex justify-content-between align-items-center mt-3">
-        <p class="mb-0">Upvotes: <%= reply.votes || 0 %></p>
+        <div>
+          <p class="mb-0">Votes: <%= reply.votes.up.count - reply.votes.down.count %></p>
+          <div class="d-flex align-items-center">
+            <% current_vote = reply.votes.find_by(user: current_user) %>
+            
+            <%= button_to "Upvote",
+                          post_reply_votes_path(reply.post, reply, vote: { vote_type: :up }),
+                          method: :post,
+                          class: "btn #{current_vote&.vote_type == 'up' ? 'btn-primary' : 'btn-outline-primary'} btn-sm mr-2" %>
+
+            <%= button_to "Downvote",
+                          post_reply_votes_path(reply.post, reply, vote: { vote_type: :down }),
+                          method: :post,
+                          class: "btn #{current_vote&.vote_type == 'down' ? 'btn-danger' : 'btn-outline-danger'} btn-sm" %>
+          </div>
+        </div>
+
         <% if reply.check_user_authorized(current_user) %>
           <div class="button-row text-center mt-4">
             <turbo-frame id="reply_edit_<%= reply.id %>" class="d-inline-block">

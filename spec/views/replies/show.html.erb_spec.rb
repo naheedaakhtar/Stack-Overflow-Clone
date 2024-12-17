@@ -11,7 +11,6 @@ RSpec.describe "replies/show", type: :view do
     assign(:reply, Reply.create!(
       text: "Text",
       user: user,
-      votes: 2,
       post: post,
     ))
   end
@@ -19,7 +18,6 @@ RSpec.describe "replies/show", type: :view do
   it "renders attributes in <p>" do
     render
     expect(rendered).to match(/Text/)
-    expect(rendered).to match(/2/)
     expect(rendered).to match(/joeschmoe/)
   end
 end

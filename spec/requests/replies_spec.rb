@@ -22,7 +22,6 @@ RSpec.describe "/replies", type: :request do
     {
       text: "MyString",
       user_id: @user.id,
-      votes: 1,
       post_id: @post.id
     }
   }

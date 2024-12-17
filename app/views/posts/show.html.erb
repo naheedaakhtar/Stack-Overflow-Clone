@@ -17,10 +17,26 @@
     <%= button_to "Destroy this post", @post, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure you want to delete this post?" } %>
   <% end %>
 </div>
+<% if user_signed_in? %>
+  <% current_vote = @post.votes.find_by(user: current_user) %>
+  <div class="vote-buttons">
+    <%= button_to 'Upvote', 
+                  post_votes_path(@post, vote: { vote_type: 'up' }), 
+                  method: :post, 
+                  class: "btn #{current_vote&.vote_type == 'up' ? 'btn-primary' : 'btn-outline-primary'}" %>
+    <%= button_to 'Downvote', 
+                  post_votes_path(@post, vote: { vote_type: 'down' }), 
+                  method: :post, 
+                  class: "btn #{current_vote&.vote_type == 'down' ? 'btn-danger' : 'btn-outline-danger'}" %>
+  </div>
+<% else %>
+  <p>You must be logged in to vote.</p>
+<% end %>
+
 
 <section class="replies mt-5">
   <h3>Replies</h3>
-  <% @post.replies.order(votes: :desc).each do |reply| %>
+  <% @post.replies.sort_by { |reply| reply.votes.up.count - reply.votes.down.count }.reverse.each do |reply| %>
     <%= render reply %>
   <% end %>
 </section>

@@ -11,7 +11,6 @@ RSpec.describe "replies/edit", type: :view do
     Reply.create!(
       text: "MyString",
       user: user,
-      votes: 1,
       post: post
     )
   }
@@ -29,7 +28,6 @@ RSpec.describe "replies/edit", type: :view do
     assert_select "form[action=?][method=?]", post_reply_path(post, reply), "post" do
       assert_select "input[name=_method][value=patch]", 1
       assert_select "textarea[name=?]", "reply[text]"
-      assert_select "input[name=?]", "reply[votes]"
     end
   end
 end

@@ -10,7 +10,6 @@ RSpec.describe "posts/show", type: :view do
       title: "Title",
       text: "Text",
       user_id: user.id,
-      votes: 2
     ))
     sign_in user
   end
@@ -20,6 +19,5 @@ RSpec.describe "posts/show", type: :view do
     expect(rendered).to match(/Title/)
     expect(rendered).to match(/Text/)
     expect(rendered).to match(//)
-    expect(rendered).to match(/2/)
   end
 end
