@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_post, only: %i[ show edit update destroy solve  unsolve]
   before_action :authenticate_user!, only: %i[ new create edit update destroy ]
 
   # GET /posts or /posts.json
@@ -68,6 +68,18 @@ class PostsController < ApplicationController
       format.html { redirect_to posts_path, status: :see_other, notice: "Post was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def solve
+    @post.solve
+    flash[:notice] = "After marking post as solved, user should edit the post to identify solution or mark the reply with the correct solution"
+    redirect_to post_path(@post.id)
+  end
+
+  def unsolve
+    @post.unsolve
+    flash[:notice]= "Reply solution still marked as solution" if @post.reply_sol? 
+    redirect_to post_path(@post.id)
   end
 
   private

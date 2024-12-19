@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get :saved_posts
     end
   end
+
   put '/user_creds/:id/approve', to: 'user_creds#approve', as: 'user_cred_approve'
   delete '/users/:id', to: 'user_creds#delete', as: 'user_cred'
   get '/user_creds/moderate', to:'user_creds#moderate', as: 'user_creds_mod'
@@ -17,6 +18,13 @@ Rails.application.routes.draw do
     resources :replies, only: [ :new, :create, :edit, :update ]
     resource :saved_post, only: [ :create, :destroy]
   end
+
+  put '/posts/:id/solve', to: 'posts#solve', as: 'solve_post'
+  put '/posts/:id/unsolve', to: 'posts#unsolve', as: 'unsolve_post'
+
+  put '/replies/:id/solve', to: 'replies#solve', as: 'solve_reply'
+  put '/replies/:id/unsolve', to: 'replies#unsolve', as: 'unsolve_reply'
+  
   resources :tags
   
   resources :home, only: [ :show ]

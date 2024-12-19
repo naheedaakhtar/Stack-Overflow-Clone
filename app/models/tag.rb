@@ -11,7 +11,7 @@ class Tag < ApplicationRecord
     end
 
     def self.choosable_tags
-        Tag.where.not(name: "Instructor Response")
+        Tag.where.not(name: "Instructor Response").where.not(name: "Post Solved")
     end
 
     def self.tagNames

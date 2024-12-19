@@ -73,6 +73,21 @@ class RepliesController < ApplicationController
     end
   end
 
+  def solve
+    @reply = Reply.find(params[:id])
+    @reply.solution = true
+    @reply.save
+    @reply.post.solve
+    redirect_to post_path(@reply.post.id)
+  end
+
+  def unsolve
+    @reply = Reply.find(params[:id])
+    @reply.solution = false
+    @reply.save
+    @reply.post.unsolve
+    redirect_to post_path(@reply.post.id)
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

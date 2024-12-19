@@ -52,4 +52,25 @@ class Post < ApplicationRecord
     full_tags
   end
 
+  def solve
+    self.tags << Tag.find_by(name: "Post Solved") unless self.solved?
+    self.save
+  end
+
+  def reply_sol?
+    reply_sol = false
+    self.replies.each {|reply| reply_sol = true if reply.solution?}
+    reply_sol
+  end
+
+  def unsolve
+    self.tags.delete(Tag.find_by(name: "Post Solved")) unless self.reply_sol?
+  end
+
+  def solved?
+    self.tags.each do |tag|
+      return true if tag==Tag.find_by(name: "Post Solved")
+    end
+    return false
+  end
 end

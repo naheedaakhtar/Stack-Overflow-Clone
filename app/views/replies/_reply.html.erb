@@ -4,6 +4,9 @@
       <% if reply.user.approved? %>
         <%= render Tag.approved %>
       <% end %>
+      <% if reply.solution %>
+        <div class= "badge badge-pill custom-badge-color text-success"> Post Solution </div>
+      <% end %>
       <p class="card-text"><%= reply.text %></p>
       <p class="card-footer text-muted">
         Replied by <%= reply.user&.username || "Unknown user" %> on <%= reply.created_at.strftime("%B %d, %Y") %>
@@ -28,6 +31,13 @@
 
         <% if reply.check_user_authorized(current_user) %>
           <div class="button-row text-center mt-4">
+            <% if current_user == reply.post.user %>
+              <% if reply.solution %>
+                <%= button_to "Remove Reply as Solution", unsolve_reply_path(reply), method: :put, class: "btn btn-warning btn-sm mr-2" %>
+              <% else %>
+                <%= button_to "Mark Reply as Solution", solve_reply_path(reply), method: :put, class: "btn btn-warning btn-sm mr-2" %>
+              <% end %>
+            <% end %>
             <turbo-frame id="reply_edit_<%= reply.id %>" class="d-inline-block">
               <%= link_to "Edit this reply", edit_reply_path(reply), class: "btn btn-warning btn-sm mr-2", title: "Edit your reply" %>
             </turbo-frame>

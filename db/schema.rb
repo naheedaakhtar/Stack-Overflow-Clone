@@ -60,6 +60,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_11_221150) do
     t.string "text"
     t.integer "post_id", null: false
     t.integer "user_id", null: false
+    t.boolean "solution"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "parent_reply_id"
