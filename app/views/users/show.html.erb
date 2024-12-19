@@ -4,6 +4,8 @@
     <title>Profile Page</title>
   </head>
 
+
+
   <body class="bg-light">
     <div class="container mt-5 p-4 bg-white rounded shadow">
       <h1 class="text-center text-primary">Welcome, <%= @user.firstname %>!</h1>
@@ -11,12 +13,32 @@
       <p class="lead"><strong>Username:</strong> <%= @user.username %></p>
       <p class="lead"><strong>Email:</strong> <%= @user.email %></p>
       <p class="lead"><strong>Full Name:</strong> <%= @user.firstname %> <%= @user.lastname %></p>
+      <% if !current_user.nil? && (current_user.approved?) %>
+        <p class="lead"><strong> Certified Instructor</strong> </p>
+      <% end %>
 
+      <% if notice %>
+      <div>
+      <%= notice %>
+      </div>
+      <% end %>
+      <div class="text-center mt-4">
+        <%= link_to 'Edit Profile', edit_user_path(@user), class: 'btn btn-outline-primary mx-2' %>
+        <%= link_to 'Send Credentials', new_user_user_cred_path(@user), class: 'btn btn-outline-primary mx-2' %>
+      </div>
+      <div class= "text-center mt-4">
+        <% if !current_user.nil? && (current_user.admin?)%>
+        Admin Options:
+        <%= link_to "Approve Credentials", user_creds_mod_path, class: "btn btn-outline-primary mx-2" %>   
+        <%= link_to "Revoke Credentials", user_creds_path, class: "btn btn-outline-primary mx-2" %> 
+        <% end %>
+      </div>
       <div class="text-center mt-4">
         <button class="btn btn-outline-primary mx-2" onclick="showSection('overview')">Overview</button>
         <button class="btn btn-outline-primary mx-2" onclick="showSection('posts')">Posts</button>
         <button class="btn btn-outline-primary mx-2" onclick="showSection('saved')">Saved Posts</button>
       </div>
+      
 
         <div id="overview" class="profile-section mt-4">
           <%if @overview_posts&.any?%>
@@ -72,10 +94,6 @@
               <% end %>
               </div>
               </div>
-          <div class="mt-3 d-flex justify-content-start">
-              <%= link_to 'Edit Profile', edit_user_path(@user), class: 'btn btn-primary btn-sm me-2' %>
-              <%= link_to 'Send Credentials', new_user_user_cred_path(@user), class: 'btn btn-primary btn-sm' %>
-          </div>
       </div>
 
       <script>
@@ -90,10 +108,8 @@
             }
       </script>
       </div>
-      <% if !current_user.nil? && (current_user.admin?)%>
-      <%= link_to "Approve Credentials", user_creds_path, class: "btn btn-info" %>   
-      <% end %>
-       </div>
+ 
+      </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>

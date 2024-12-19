@@ -13,7 +13,7 @@
     </tr>
   </thead>
   <tbody>
-  <% Tag.choosable_tags.each do |tag| %>
+  <% @tags.each do |tag| %>
     <tr>
     <% if tag.name!= "" %>
     <td> <%= tag.name %>
@@ -27,4 +27,6 @@
   </tbody>
 </table>
 
-<%= link_to "New tag", new_tag_path %>
+<div class="text-center mt-4">
+<%= link_to "New tag", new_tag_path, class: 'btn btn-primary'%>
+<div>

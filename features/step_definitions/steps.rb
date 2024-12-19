@@ -1,10 +1,22 @@
 
-
-
 Given('these tags exist:') do |table|
   # table is a Cucumber::MultilineArgument::DataTable
   table.hashes.each do |h|
     Tag.create!(h)
+  end
+end
+
+Given('these posts exist:') do |table|
+  # table is a Cucumber::MultilineArgument::DataTable
+  table.hashes.each do |h|
+    Post.create!(h)
+  end
+end
+
+Given('these users exist:') do |table|
+  # table is a Cucumber::MultilineArgument::DataTable
+  table.hashes.each do |h|
+    User.create!(h)
   end
 end
 
@@ -60,43 +72,42 @@ When('I look at the {string} page') do |tag|
 end
 
 
-Given('these posts exist:') do |table|
-  # table is a Cucumber::MultilineArgument::DataTable
-  pending # Write code here that turns the phrase above into concrete actions
-end
+
 
 Given('I request certification') do
-  pending # Write code here that turns the phrase above into concrete actions
+  visit user_path(User.find_by(username: 'admin'))
+  click_on "Send Credentials"
+  click_on "Submit Credentials"
+end
+
+Given('I am on my profile') do
+  visit user_path(User.find_by(username: 'admin'))
 end
 
 Given('certification is approved by a moderator') do
-  pending # Write code here that turns the phrase above into concrete actions
+  visit user_path(User.find_by(username: 'admin'))
+  click_on "Approve Credentials"
+  click_on "Approve"
 end
 
 Given('I am on post {string}') do |string|
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-When('I leave a reply') do
-  pending # Write code here that turns the phrase above into concrete actions
+  visit post_path(Post.find_by(title: string))
 end
 
 Given('I leave a reply') do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-When('I request certification') do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-When('certification is approved by a moderator') do
-  pending # Write code here that turns the phrase above into concrete actions
-end
-
-When('I am on post {string}') do |string|
-  pending # Write code here that turns the phrase above into concrete actions
+  click_on "New reply"
+  fill_in "Text", with: "test"
+  click_on "Submit Reply"
 end
 
 When('certification is denied by a moderator') do
-  pending # Write code here that turns the phrase above into concrete actions
+  visit user_path(User.find_by(username: 'admin'))
+  click_on "Approve Credentials"
+  click_on "Deny"
+end
+
+Given('{string} exists') do |title|
+  visit new_post_path
+  fill_in "Title", with: title
+  click_on "Save Post"
 end

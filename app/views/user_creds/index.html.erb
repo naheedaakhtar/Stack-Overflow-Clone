@@ -1,5 +1,4 @@
-<div>Users Requesting Approval as Professors </div>
-
+<div>List of Users Approved as Professors </div>
 <div>
   <table class="table">
     <thead>
@@ -8,7 +7,7 @@
       <th>Name</th>
       <th>School</th>
       <th>Details</th>
-      <th>Approve/Deny<th>
+      <th>Revoke Approval<th>
       </tr>
     </thead>
     <tbody id="user_cred_table">
@@ -19,8 +18,7 @@
         <td> <%= user_cred.school%>
         <td> <%= user_cred.details %>
         <td>
-        <%= button_to "Approve", user_cred_approve_path(user_cred), method: :put, class: 'btn btn-secondary' %>
-        <%= button_to "Deny", user_cred_path(user_cred), method: :delete, class: "btn btn-danger" %> 
+        <%= button_to "Revoke Access", user_cred_path(user_cred), method: :delete, class: "btn btn-danger" %> 
         </td>
       </tr>
       <% end%>

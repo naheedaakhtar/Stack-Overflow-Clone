@@ -1,5 +1,9 @@
 class UserCredsController < ApplicationController
 
+  def index
+    @user_creds = UserCred.where(approved: true)
+  end 
+
   def moderate
     @user_creds = UserCred.where(approved: false)
   end
@@ -8,16 +12,31 @@ class UserCredsController < ApplicationController
     @user_cred = UserCred.find(params[:id])
     @user_cred.approved= true
     @user_cred.save()
-    render moderate
+    @user_cred.user.replies.each do |reply|
+      reply.post.add_instr_response
+    end
+    redirect_to user_creds_mod_path
   end
 
   def delete
     @user_cred = UserCred.find(params[:id])
+    @user_cred.approved = false
+
+    @user_cred.user.replies.each do |reply|
+      reply.post.remove_instr_response
+    end
     @user_cred.destroy()
+
+    redirect_to user_creds_path
   end
 
   def new
-    @user_cred = UserCred.new()
+    if current_user.user_cred.nil?
+      @user_cred = UserCred.new()
+    else
+      flash[:notice]="User Credential Request Already Created"
+      redirect_to user_path(current_user)
+    end
   end
 
   def create

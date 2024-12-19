@@ -2,14 +2,15 @@ Rails.application.routes.draw do
   
   devise_for :users
   resources :users, only: [ :show, :edit, :update, :index ] do
-    resources :user_creds, only: [ :new, :create]
+    resources :user_creds, only: [:new, :create]
     member do
       get :saved_posts
     end
   end
   put '/user_creds/:id/approve', to: 'user_creds#approve', as: 'user_cred_approve'
   delete '/users/:id', to: 'user_creds#delete', as: 'user_cred'
-  get '/user_creds/moderate', to:'user_creds#moderate', as: 'user_creds'
+  get '/user_creds/moderate', to:'user_creds#moderate', as: 'user_creds_mod'
+  get '/user_creds/index', to: 'user_creds#index', as: 'user_creds'
   resources :replies
   resources :posts
   resources :posts do

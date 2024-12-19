@@ -13,6 +13,7 @@ Feature: Tag and Post Associations (creating Tags and Tagging Posts)
         Given I go to create a post
         When I fill in "Title" with "Question 1"
         And I create the post
+        Given I am on post "Question 1"
         Then I should see "Posted by"
     
     Scenario: Create post with tag should create post and post should be visible on the tag's show page
