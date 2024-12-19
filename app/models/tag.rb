@@ -9,6 +9,10 @@ class Tag < ApplicationRecord
     def self.approved
         Tag.find_by(name: "Instructor Response")
     end
+    
+    def self.solved
+        Tag.find_by(name: "Post Solved")
+    end
 
     def self.choosable_tags
         Tag.where.not(name: "Instructor Response").where.not(name: "Post Solved")

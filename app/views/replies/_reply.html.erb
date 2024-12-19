@@ -31,13 +31,6 @@
 
         <% if reply.check_user_authorized(current_user) %>
           <div class="button-row text-center mt-4">
-            <% if current_user == reply.post.user %>
-              <% if reply.solution %>
-                <%= button_to "Remove Reply as Solution", unsolve_reply_path(reply), method: :put, class: "btn btn-warning btn-sm mr-2" %>
-              <% else %>
-                <%= button_to "Mark Reply as Solution", solve_reply_path(reply), method: :put, class: "btn btn-warning btn-sm mr-2" %>
-              <% end %>
-            <% end %>
             <turbo-frame id="reply_edit_<%= reply.id %>" class="d-inline-block">
               <%= link_to "Edit this reply", edit_reply_path(reply), class: "btn btn-warning btn-sm mr-2", title: "Edit your reply" %>
             </turbo-frame>
@@ -45,6 +38,13 @@
               <%= button_to "Destroy this reply", reply, method: :delete, class: "btn btn-danger btn-sm", data: { confirm: "Are you sure you want to delete this reply?" }, title: "Delete this reply" %>
             </turbo-frame>
           </div>
+        <% end %>
+        <% if current_user == reply.post.user %>
+          <% if reply.solution %>
+            <%= button_to "Remove Reply as Solution", unsolve_reply_path(reply), method: :put, class: "btn btn-success btn-sm mr-2" %>
+          <% else %>
+            <%= button_to "Mark Reply as Solution", solve_reply_path(reply), method: :put, class: "btn btn-success btn-sm mr-2" %>
+          <% end %>
         <% end %>
       </div>
     </div>

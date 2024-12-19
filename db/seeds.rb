@@ -20,7 +20,6 @@
 @user6 = User.create!(username: 'janed', password: 'password', firstname: 'Jane', lastname: 'Doe', email: 'janed@colgate.edu', role: 'student')
 
 # Tags
-Tag.create!(name: "", description: "Empty Tag")
 @python_tag = Tag.create!(name: "Python", description: "Python is a programming language that allows for many different programming practices including Object Oriented Programming and many machine learning packages ")
 Tag.create!(name: "Java", description: "Java is a programming language with static typing to create code that can be run on any platform once completed")
 Tag.create!(name: "C", description: "C is a programming language that allows for specific interactions with the low-level processes of programming")
@@ -30,27 +29,14 @@ Tag.create!(name: "C", description: "C is a programming language that allows for
 Tag.create!(name: "R", description: "R is a programming language primarily used for statistical purposes")
 Tag.create!(name: "Javascript", description: "Javascript is a language used for webpage user interaction purposes and other complicated website interface code")
 Tag.create!(name: "Git", description: "Git is a method for teams of programmers to work with branches, version control, and working apart")
-
-
   
-Tag.create!(name: "", description: "Empty Tag")
-@python_tag=Tag.create!(name: "Python", description: "Python is a programming language that allows for many different programming practices including Object Oriented Programming and many machine learning packages ")
-Tag.create!(name: "Java", description: "Java is an programming languages with static typing to create code that can be ran ony any platform once completed")
-Tag.create!(name: "C", description: "C is a programming language that allows for specific interactions with the low level processes of programming")
-@ruby_tag=Tag.create!(name: "Ruby", description: "Ruby is a programming language designed to reduce confusion by following consistent procedures and giving freedom to programmers")
-@rails_tag=Tag.create!(name: "Ruby on Rails", description: "Ruby on Rails is a series of packages for Ruby used for Software Engineering and Agile Programming")
-@sql_tag=Tag.create!(name: "SQL", description: "SQL is a language used to analyze and work with databases")
-Tag.create!(name: "R", description: "R is a programming language primarily used for statistical purposes")
-Tag.create!(name: "Javascript", description: "Javascript is a language used for webpage user interaction purposes and other complicated website interface code")
-Tag.create!(name: "Git", description: "Git is a method for teams of programmers to work with branchs, version control, and working apart")
-
-Tag.create!(name: "Design Principles", description: "Questions that are asking about the why behind design decisions")
+@design_tag =Tag.create!(name: "Design Principles", description: "Questions that are asking about the why behind design decisions")
 Tag.create!(name: "Compilation Error", description: "Questions asking about errors with programs compiling")
-Tag.create!(name: "Semantic Error", description: "Questions asking about programs producing unexpected output")
-Tag.create!(name: "Runtime Error", description: "Questions asking about programs producing errors at runtime")
+@semantic_tag =Tag.create!(name: "Semantic Error", description: "Questions asking about programs producing unexpected output")
+@runtime_tag =Tag.create!(name: "Runtime Error", description: "Questions asking about programs producing errors at runtime")
 
 @instr_tag=Tag.create!(name: "Instructor Response", description: "Posts where an instructor has responded")
-
+Tag.create!(name: "Post Solved", description: "Posts that are marked as having a solution")
 
 @post1=Post.create!(
     title: "Issue running rails db:seed",
@@ -58,6 +44,7 @@ Tag.create!(name: "Runtime Error", description: "Questions asking about programs
     user: @user4,
     created_at: Time.new(2024, 12, 6, 14, 30))
 @post1.tags <<  @rails_tag
+@post1.tags << @runtime_tag
 
   
 @post1.tags << @instr_tag
@@ -84,6 +71,7 @@ Tag.create!(name: "Runtime Error", description: "Questions asking about programs
 )
 @post3.tags << @python_tag  # Add the tag to the post through the association
 @post3.tags << @instr_tag
+@post3.tags << @design_tag
 
 @post3.save!
 
@@ -94,6 +82,7 @@ Tag.create!(name: "Runtime Error", description: "Questions asking about programs
   created_at: Time.new(2024, 12, 3, 14, 45)
 )
 @post4.tags << @sql_tag  # Add the tag to the post through the association
+@post4.tags << @semantic_tag
 @post4.save!
 
 # Replies

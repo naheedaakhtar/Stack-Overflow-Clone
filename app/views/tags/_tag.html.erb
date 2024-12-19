@@ -1,5 +1,5 @@
 
-<% if tag == Tag.approved %>
+<% if tag == Tag.approved || tag == Tag.solved %>
     <div class= "badge badge-pill custom-badge-color2"> <%= link_to tag.name,tag %> </div>
 <% else %>
 <div class= "badge badge-pill custom-badge-color"> <%= link_to tag.name,tag %> </div>
