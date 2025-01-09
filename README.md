@@ -29,8 +29,8 @@ Deployment: Prev. Fly.io
 1. Clone this repository
 2. Navigate to the project directory
 3. Install dependencies:
-  bundle install
-  npm install
+   ```bundle install
+  npm install ```
 4. Set up the database
    rails db:create
    rails db:migrate
