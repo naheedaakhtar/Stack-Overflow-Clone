@@ -31,19 +31,23 @@ Deployment: Prev. Fly.io
 3. Install dependencies:
    ```
    bundle install
-     npm install 
+   npm install 
 
 4. Set up the database
+   ```
    rails db:create
    rails db:migrate
-6. Run the server
+5. Run the server
+   ```
    rails server
-7. Open your browser and visit http://localhost:3000
+6. Open your browser and visit http://localhost:3000
 
 ## Testing 
 1. Ensure dependencies are installed
+   ```
    bundle install
 
 2. run tests
+   ```
    cucumber
    rspec
