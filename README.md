@@ -1,5 +1,7 @@
 # Stack-Overflow-Clone
 
+This project was developed over the course of a semester in collaboration with four other group members. We followed the Agile lifecycle, utilizing pull requests, creating and prioritizing user stories, assigning points for tasks, and engaging in pair programming. The primary goal was to create a low-level replica of StackOverflow while adhering to Agile principles. 
+
 ## Features
 
 Post Management: Users can create and save posts
